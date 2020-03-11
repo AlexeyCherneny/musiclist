@@ -9,11 +9,11 @@ import {store} from './app/store';
 class Application extends Component {
   render() {
     return (
-      // <SafeAreaView>
-      <Provider store={store}>
-        <App />
-      </Provider>
-      // </SafeAreaView>
+      <SafeAreaView>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </SafeAreaView>
     );
   }
 }

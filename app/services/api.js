@@ -1,7 +1,7 @@
 import apisauce from 'apisauce';
 
-const DEVELOPMENT_URL = '/';
-const PRODUCTION_URL = '/';
+const DEVELOPMENT_URL = 'https://iawake-backend-devel.dokku.f17y.com/api';
+const PRODUCTION_URL = 'https://iawake-backend-devel.dokku.f17y.com/api';
 
 let hostURL;
 
@@ -11,7 +11,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   hostURL = PRODUCTION_URL;
 }
 
-const create = (baseURL = `${hostURL}api/`) => {
+const create = (baseURL = `${hostURL}/`) => {
   const api = apisauce.create({
     baseURL,
 
@@ -25,6 +25,8 @@ const create = (baseURL = `${hostURL}api/`) => {
 
   return {
     data: api,
+
+    fetchLibraries: () => api.get('v1/programs/free'),
   };
 };
 

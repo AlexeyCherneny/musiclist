@@ -13,7 +13,7 @@ const createRootReducer = () =>
   combineReducers({
     navigation: navigationReducer,
 
-    library: libraryReducer,
+    libraries: libraryReducer,
   });
 
 export default createRootReducer;

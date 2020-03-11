@@ -3,16 +3,17 @@ import {createReduxContainer} from 'react-navigation-redux-helpers';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
 
+import Libraries from '../screens/Libraries';
+import Library from '../screens/Library';
+
 export const Navigation = createSwitchNavigator({
-  Libraries: () => null,
+  Libraries: Libraries,
+  Library: Library,
 });
 
-const mapState = ({navigation}) => {
-  console.log('navigation: ', navigation);
-  return {
-    state: navigation,
-  };
-};
+const mapState = ({navigation}) => ({
+  state: navigation,
+});
 
 export default compose(
   connect(mapState),

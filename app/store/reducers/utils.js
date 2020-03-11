@@ -5,8 +5,8 @@ export const CRUDState = {
   data: [],
   isDownloading: false,
   isCreating: false,
-  updatingUuids: [],
-  deletingUuids: [],
+  updatingIds: [],
+  deletingIds: [],
 };
 
 const addItemToArray = (arr, item) => {
@@ -42,7 +42,7 @@ const defaultOnUpdateDataMap = (data, payload) => {
     data,
     payload,
     (a, b) =>
-      String(a.uuid) === String(b.uuid) || String(a.uuid) === String(b.uuid),
+      String(a.id) === String(b.id) || String(a.id) === String(b.id),
   );
 };
 
@@ -50,7 +50,7 @@ const defaultOnDeleteDataMap = (data, payload) => {
   return removeItemFromArray(
     data,
     payload,
-    (itemA, itemB) => itemA.uuid !== itemB,
+    (itemA, itemB) => itemA.id !== itemB,
   );
 };
 
@@ -149,7 +149,7 @@ export const createCRUDReducer = (
       return {
         ...state,
 
-        updatingUuids: addItemToArray(state.updatingUuids, payload.uuid),
+        updatingIds: addItemToArray(state.updatingIds, payload.id),
       };
     },
     //
@@ -159,16 +159,16 @@ export const createCRUDReducer = (
         ...state,
 
         data: onUpdateDataMap(state.data, payload),
-        updatingUuids: removeItemFromArray(state.updatingUuids, payload.uuid),
+        updatingIds: removeItemFromArray(state.updatingIds, payload.id),
       };
     },
     //
-    // payload - uuid of updating item
+    // payload - id of updating item
     [`UPDATE_${upperName}_FAILURE`]: (state, payload) => {
       return {
         ...state,
 
-        updatingUuids: removeItemFromArray(state.updatingUuids, payload),
+        updatingIds: removeItemFromArray(state.updatingIds, payload),
       };
     },
     // --
@@ -178,31 +178,31 @@ export const createCRUDReducer = (
     // DELETE ENTITY ------------------------------------
     // --------------------------------------------------
     //
-    // payload - uuid of deleting item
+    // payload - id of deleting item
     [`DELETE_${upperName}_REQUEST`]: (state, payload) => {
       return {
         ...state,
 
-        deletingUuids: addItemToArray(state.deletingUuids, payload),
+        deletingIds: addItemToArray(state.deletingIds, payload),
       };
     },
     //
-    // payload - uuid of deleting item
+    // payload - id of deleting item
     [`DELETE_${upperName}_SUCCESS`]: (state, payload) => {
       return {
         ...state,
 
         data: onDeleteDataMap(state.data, payload),
-        deletingUuids: removeItemFromArray(state.deletingUuids, payload),
+        deletingIds: removeItemFromArray(state.deletingIds, payload),
       };
     },
     //
-    // payload - uuid of deleting item
+    // payload - id of deleting item
     [`DELETE_${upperName}_FAILURE`]: (state, payload) => {
       return {
         ...state,
 
-        deletingUuids: removeItemFromArray(state.deletingUuids, payload),
+        deletingIds: removeItemFromArray(state.deletingIds, payload),
       };
     },
     // --
@@ -212,7 +212,7 @@ export const createCRUDReducer = (
     // --------------------------------------------------
     // --------------------------------------------------
     //
-    // payload - uuid of deleting item
+    // payload - id of deleting item
     [`RESET_${pluralizeUpperName}`]: (state, payload) => {
       return {
         ...state,
