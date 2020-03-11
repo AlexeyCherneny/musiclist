@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
+import {SafeAreaView} from 'react-native';
+
+import App from './app/index';
 
 import {store} from './app/store';
 
-class App extends Component {
+class Application extends Component {
   render() {
-    return <Provider store={store} />;
+    return (
+      // <SafeAreaView>
+      <Provider store={store}>
+        <App />
+      </Provider>
+      // </SafeAreaView>
+    );
   }
 }
 
-export default App;
+export default Application;
