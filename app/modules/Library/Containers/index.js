@@ -3,7 +3,7 @@ import {compose, withProps} from 'recompose';
 
 import Libraries from '../Components';
 import selectors from '../../../store/selectors';
-console.log('selectors: ', selectors);
+
 const mapState = state => ({
   getLibraryById: selectors.getLibraryById(state),
 });
@@ -14,7 +14,7 @@ const LibrariesContainer = compose(
     const libraryId = navigation.getParam('libraryId', null);
     const library = getLibraryById(libraryId);
 
-    return library;
+    return {library};
   }),
 )(Libraries);
 
